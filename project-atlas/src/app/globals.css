@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-atlas-cream: #F5F5F0;
+  --color-atlas-black: #050505;
+}
+
+:root {
+  --background: var(--color-atlas-cream);
+  --foreground: var(--color-atlas-black);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+}
