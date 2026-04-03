@@ -2,11 +2,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   output: 'export',
-  // This must match your repo name exactly (case-sensitive)
-  basePath: '/ProjectAtlas', 
   images: {
     unoptimized: true,
   },
+  // We are REMOVING basePath here because we will handle it manually in the code
 };
 
 export default nextConfig;
