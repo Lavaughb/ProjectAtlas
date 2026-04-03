@@ -17,9 +17,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # This line tells GitHub to run all commands inside your subfolder
     defaults:
       run:
+        # ⚠️ DOUBLE CHECK: This must match your folder name exactly
         working-directory: ./project-atlas 
 
     steps:
@@ -49,21 +49,13 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: ./project-atlas/package-lock.json # Path to lockfile
+          # This line fixes your Setup Node error by finding the lockfile anywhere
+          cache-dependency-path: "**/package-lock.json"
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
-
-      - name: Restore cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ./project-atlas/.next/cache
-          key: ${{ runner.os }}-nextjs-${{ hashFiles('project-atlas/package-lock.json', 'project-atlas/yarn.lock') }}-${{ hashFiles('project-atlas/**/*.[jt]s', 'project-atlas/**/*.[jt]sx') }}
-          restore-keys: |
-            ${{ runner.os }}-nextjs-${{ hashFiles('project-atlas/package-lock.json', 'project-atlas/yarn.lock') }}-
 
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
@@ -74,7 +66,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Point this to the 'out' folder inside your project folder
+          # This tells GitHub where the static files are after building
           path: ./project-atlas/out
 
   deploy:
