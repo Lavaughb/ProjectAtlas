@@ -17,34 +17,33 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        # ⚠️ This MUST match your folder name in GitHub exactly (Case Sensitive)
-        working-directory: ./ProjectAtlas
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: List files (Diagnostic)
+        run: ls -R  # This will show us every folder and file in the logs
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          # We removed the 'cache' line here to stop the path errors
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
 
       - name: Install dependencies
-        run: npm install  # Using a direct command to avoid the detection script failing
+        # This command manually enters the folder to install
+        run: |
+          cd ProjectAtlas
+          npm install
 
       - name: Build with Next.js
-        run: npx next build
+        run: |
+          cd ProjectAtlas
+          npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This points to the static output folder
+          # This assumes 'out' is created inside ProjectAtlas
           path: ./ProjectAtlas/out
 
   deploy:
