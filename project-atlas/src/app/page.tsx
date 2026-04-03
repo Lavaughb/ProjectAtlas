@@ -4,9 +4,6 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/navbar';
 
-// We define the base path here so it's easy to change if your repo name changes
-const BASE_PATH = '/ProjectAtlas';
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F5F0]">
@@ -15,7 +12,7 @@ export default function Home() {
       {/* ⚡ HERO BANNER - IMG_2135 */}
       <section className="relative w-full h-[90vh] overflow-hidden bg-white">
         <Image 
-          src={`${BASE_PATH}/IMG_2135.jpeg`} 
+          src="/IMG_2135.jpeg" 
           alt="Project Atlas Group"
           fill
           priority
@@ -42,7 +39,7 @@ export default function Home() {
       <section className="flex flex-col md:flex-row h-screen border-y border-zinc-200">
         <div className="flex-1 relative h-1/2 md:h-full group overflow-hidden">
           <Image 
-            src={`${BASE_PATH}/DY0A3524.jpeg`} 
+            src="/DY0A3524.jpeg" 
             alt="Always Prevail Street"
             fill
             sizes="50vw"
@@ -67,7 +64,7 @@ export default function Home() {
         {/* Full Height Feature */}
         <div className="col-span-2 row-span-2 relative group overflow-hidden">
           <Image 
-            src={`${BASE_PATH}/9-SOY00376edited.jpeg`} 
+            src="/9-SOY00376edited.jpeg" 
             alt="Collection" 
             fill 
             sizes="50vw" 
@@ -80,23 +77,23 @@ export default function Home() {
 
         {/* Detail Shots */}
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src={`${BASE_PATH}/IMG_4581.jpeg`} alt="Detail" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <Image src="/IMG_4581.jpeg" alt="Detail" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
         </div>
 
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src={`${BASE_PATH}/IMG_3535.jpeg`} alt="Lookbook" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <Image src="/IMG_3535.jpeg" alt="Lookbook" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
         </div>
 
         <div className="col-span-2 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src={`${BASE_PATH}/DY0A3573.jpeg`} alt="Shadow" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <Image src="/DY0A3573.jpeg" alt="Shadow" fill sizes="50vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
         </div>
 
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src={`${BASE_PATH}/IMG_3554.jpeg`} alt="Model" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <Image src="/IMG_3554.jpeg" alt="Model" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
         </div>
 
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src={`${BASE_PATH}/IMG_4574.jpeg`} alt="Lifestyle" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
+          <Image src="/IMG_4574.jpeg" alt="Lifestyle" fill sizes="25vw" className="object-cover group-hover:scale-105 transition-transform duration-700"/>
         </div>
 
       </section>
