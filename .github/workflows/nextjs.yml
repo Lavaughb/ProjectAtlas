@@ -19,55 +19,32 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        # This matches the directory you just provided
-        working-directory: ./ProjectAtlas 
+        # ⚠️ This MUST match your folder name in GitHub exactly (Case Sensitive)
+        working-directory: ./ProjectAtlas
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Detect package manager
-        id: detect-package-manager
-        run: |
-          if [ -f "yarn.lock" ]; then
-            echo "manager=yarn" >> $GITHUB_OUTPUT
-            echo "command=install" >> $GITHUB_OUTPUT
-            echo "runner=yarn" >> $GITHUB_OUTPUT
-            exit 0
-          elif [ -f "package.json" ]; then
-            echo "manager=npm" >> $GITHUB_OUTPUT
-            echo "command=ci" >> $GITHUB_OUTPUT
-            echo "runner=npx --no-install" >> $GITHUB_OUTPUT
-            exit 0
-          else
-            echo "Unable to determine package manager"
-            exit 1
-          fi
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: ${{ steps.detect-package-manager.outputs.manager }}
-          # This line is usually the culprit for your error. 
-          # Using ** tells it to look in all subdirectories for the lockfile.
-          cache-dependency-path: "**/package-lock.json"
+          # We removed the 'cache' line here to stop the path errors
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          static_site_generator: next
 
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: npm install  # Using a direct command to avoid the detection script failing
 
       - name: Build with Next.js
-        run: ${{ steps.detect-package-manager.outputs.runner }} next build
+        run: npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This must point to the 'out' folder created inside your working directory
+          # This points to the static output folder
           path: ./ProjectAtlas/out
 
   deploy:
