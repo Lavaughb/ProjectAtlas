@@ -21,30 +21,27 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: List files (Diagnostic)
-        run: ls -R  # This will show us every folder and file in the logs
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Install dependencies
-        # This command manually enters the folder to install
+        # Using lowercase 'project-atlas' because that is the folder name in your repo
         run: |
-          cd ProjectAtlas
+          cd project-atlas
           npm install
 
       - name: Build with Next.js
         run: |
-          cd ProjectAtlas
+          cd project-atlas
           npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # This assumes 'out' is created inside ProjectAtlas
-          path: ./ProjectAtlas/out
+          # This points to the export folder created by Next.js
+          path: ./project-atlas/out
 
   deploy:
     environment:
