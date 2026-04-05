@@ -1,13 +1,15 @@
 import type { NextConfig } from 'next';
 import { withSentryConfig } from '@sentry/nextjs';
 
+const isGithubPages = process.env.GITHUB_PAGES === 'true';
+
 const nextConfig: NextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  basePath: '/ProjectAtlas',
-  assetPrefix: '/ProjectAtlas',
+  basePath: isGithubPages ? '/ProjectAtlas' : '',
+  assetPrefix: isGithubPages ? '/ProjectAtlas' : '',
 
   // Disable strict mode to prevent double-rendering in dev
   reactStrictMode: true,

@@ -35,7 +35,7 @@ jobs:
       - name: Build with Next.js
         run: |
           cd project-atlas
-          npx next build
+          GITHUB_PAGES=true npx next build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
