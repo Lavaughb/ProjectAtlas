@@ -11,7 +11,7 @@ export default function Home() {
       
       <section className="relative w-full h-[90vh] overflow-hidden bg-white">
         <Image 
-          src="/ProjectAtlas/IMG_2135.jpeg" 
+          src="/IMG_2135.jpeg" 
           alt="Project Atlas Group"
           fill
           priority
@@ -37,7 +37,7 @@ export default function Home() {
       <section className="flex flex-col md:flex-row h-screen border-y border-zinc-200">
         <div className="flex-1 relative h-1/2 md:h-full group overflow-hidden">
           <Image 
-            src="/ProjectAtlas/DY0A3524.jpeg" 
+            src="/DY0A3524.jpeg" 
             alt="Always Prevail Street"
             fill
             sizes="50vw"
@@ -46,6 +46,9 @@ export default function Home() {
         </div>
         
         <div className="flex-[1] bg-zinc-900 flex flex-col justify-center px-8 md:px-20 text-white">
+          <p className="text-sm md:text-base font-light uppercase tracking-widest text-zinc-400 mb-4">
+            Lock in and make a choice
+          </p>
           <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8 italic">
             "You have freedom"
           </h2>
@@ -54,22 +57,22 @@ export default function Home() {
 
       <section className="p-4 md:p-8 grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[300px] md:auto-rows-[500px]">
         <div className="col-span-2 row-span-2 relative group overflow-hidden">
-          <Image src="/ProjectAtlas/9-SOY00376edited.jpeg" alt="Col" fill sizes="50vw" className="object-cover"/>
+          <Image src="/9-SOY00376edited.jpeg" alt="Col" fill sizes="50vw" className="object-cover"/>
         </div>
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src="/ProjectAtlas/IMG_4581.jpeg" alt="Det" fill sizes="25vw" className="object-cover"/>
+          <Image src="/IMG_4581.jpeg" alt="Det" fill sizes="25vw" className="object-cover"/>
         </div>
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src="/ProjectAtlas/IMG_3535.jpeg" alt="Look" fill sizes="25vw" className="object-cover"/>
+          <Image src="/IMG_3535.jpeg" alt="Look" fill sizes="25vw" className="object-cover"/>
         </div>
         <div className="col-span-2 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src="/ProjectAtlas/DY0A3573.jpeg" alt="Sha" fill sizes="50vw" className="object-cover"/>
+          <Image src="/DY0A3573.jpeg" alt="Sha" fill sizes="50vw" className="object-cover"/>
         </div>
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src="/ProjectAtlas/IMG_3554.jpeg" alt="Mod" fill sizes="25vw" className="object-cover"/>
+          <Image src="/IMG_3554.jpeg" alt="Mod" fill sizes="25vw" className="object-cover"/>
         </div>
         <div className="col-span-1 row-span-1 relative group overflow-hidden bg-zinc-200">
-          <Image src="/ProjectAtlas/IMG_4574.jpeg" alt="Life" fill sizes="25vw" className="object-cover"/>
+          <Image src="/IMG_4574.jpeg" alt="Life" fill sizes="25vw" className="object-cover"/>
         </div>
       </section>
     </main>
