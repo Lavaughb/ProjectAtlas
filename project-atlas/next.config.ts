@@ -6,10 +6,8 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // IMPORTANT: If your GitHub Pages URL is username.github.io/project-atlas
-  // uncomment the lines and update the repo name:
-  // basePath: '/project-atlas',
-  // assetPrefix: '/project-atlas',
+  basePath: '/ProjectAtlas',
+  assetPrefix: '/ProjectAtlas',
 
   // Disable strict mode to prevent double-rendering in dev
   reactStrictMode: true,
