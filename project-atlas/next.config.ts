@@ -8,8 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: isGithubPages ? '/ProjectAtlas' : '',
-  assetPrefix: isGithubPages ? '/ProjectAtlas' : '',
+
 
   // Disable strict mode to prevent double-rendering in dev
   reactStrictMode: true,
