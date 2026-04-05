@@ -6,7 +6,7 @@ import { Shirt, CloudSun, Watch } from 'lucide-react';
 import { useState } from 'react';
 import Navbar from '@/components/navbar';
 
-const basePath = process.env.NODE_ENV === 'production' ? '/ProjectAtlas' : '';
+const basePath = process.env.GITHUB_PAGES === 'true' ? '/ProjectAtlas' : '';
 
 // Replace with your Formspree form ID from https://formspree.io
 const FORMSPREE_ID = 'xojppkzz';
