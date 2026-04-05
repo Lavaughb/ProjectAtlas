@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   // IMPORTANT: If your GitHub Pages URL is username.github.io/project-atlas
-  // uncomment these lines and update the repo name:
+  // uncomment the lines and update the repo name:
   // basePath: '/project-atlas',
   // assetPrefix: '/project-atlas',
 
@@ -29,3 +29,4 @@ export default withSentryConfig(nextConfig, {
   autoInstrumentServerFunctions: false,
   autoInstrumentMiddleware: false,
 });
+
