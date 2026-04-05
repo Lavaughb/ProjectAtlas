@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Project Atlas
+
+A sleek, anticipation-driven clothing brand website built as a static site deployed to GitHub Pages.
+
+## Tech Stack
+
+- **Next.js 16** — React framework with static export (`output: 'export'`)
+- **React 19** — UI library
+- **TypeScript** — Type safety
+- **Tailwind CSS 4** — Utility-first styling
+- **Framer Motion** — Scroll and hover animations
+- **Lucide React** — Icons (Shirt, CloudSun, Watch, etc.)
+- **Formspree** — Waitlist form submissions (no backend needed)
+- **Sentry** — Error monitoring
+- **GitHub Pages** — Hosting via GitHub Actions
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+cd project-atlas
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view locally.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build & Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+Static files are exported to `out/`. Deployment to GitHub Pages is automated via `.github/workflows/nextjs.yml` on push to `main`.
 
-To learn more about Next.js, take a look at the following resources:
+## Page Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+page.tsx
+├── Navbar                  — Sticky nav with ATLAS wordmark, links, cart, mobile menu
+├── Hero Banner             — Full-width image with "Project Atlas" title + CTA
+├── Split Section           — Image left / dark quote block right
+├── Marquee Ticker          — Scrolling "Coming Soon — Drop 001" text strip
+├── Gallery                 — 2x4 masonry image grid with hover effects
+├── Statement               — Dark section with brand manifesto text
+├── Drop 001 Preview        — Three category cards (Essentials, Outerwear, Accessories)
+├── Always Prevail          — Gradient banner with tagline
+├── Waitlist Signup         — Email form (Formspree) with toast notification
+└── Footer                  — Brand mark, social links, copyright
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Project Structure
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+project-atlas/
+├── src/
+│   ├── app/
+│   │   ├── layout.tsx      — Root layout with metadata
+│   │   ├── page.tsx        — Main page with all sections
+│   │   └── globals.css     — Tailwind imports + theme colors
+│   └── components/
+│       └── navbar.tsx      — Navigation component
+├── public/                 — Images (JPEG)
+├── next.config.ts          — Static export + conditional basePath for GitHub Pages
+└── package.json
+```
