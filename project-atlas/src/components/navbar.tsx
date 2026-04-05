@@ -1,59 +1,72 @@
-// src/components/navbar.tsx
 "use client"
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ShoppingBag, ArrowRight } from 'lucide-react'
-
-// Define how we want the text to slide and fade
-const logoVariants = {
-  initial: { opacity: 0, x: -10, display: 'none' },
-  hover: { opacity: 1, x: 0, display: 'inline-block' },
-}
+import { ShoppingBag, Menu, X } from 'lucide-react'
+import { useState } from 'react'
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
   return (
-    <nav className="sticky top-0 z-50 w-full bg-atlas-cream/90 backdrop-blur-sm px-6 md:px-10 py-5 flex justify-between items-center border-b border-zinc-200">
-      
-      {/* 🤯 THE DYNAMIC ATLAS LOGO */}
-      <Link href="/">
-        <motion.div 
-          className="flex items-center gap-1 group"
-          initial="initial"
-          whileHover="hover" // Triggers the animation on all child motions
-        >
-          {/* Static, sharp 'A' */}
-          <span className="font-black text-3xl tracking-tighter text-atlas-black">
-            A
+    <>
+      <nav className="sticky top-0 z-50 w-full bg-[#EAEAE5]/90 backdrop-blur-md px-6 md:px-10 py-4 flex justify-between items-center border-b border-zinc-300/50">
+        <Link href="/" className="group">
+          <span className="font-black text-2xl md:text-3xl tracking-tighter text-zinc-900">
+            ATLAS
           </span>
-          {/* The expanding 'TLAS' */}
-          <motion.span 
-            variants={logoVariants}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="font-black text-3xl tracking-tighter text-atlas-black origin-left"
-          >
-            tlas
-          </motion.span>
-          <span className="text-zinc-300 font-light text-2xl">©</span>
-        </motion.div>
-      </Link>
+        </Link>
 
-      {/* MINIMAL NAV LINKS (Desktop only for performance) */}
-      <div className="hidden md:flex space-x-12 text-[10px] uppercase tracking-[0.4em] font-bold text-zinc-600">
-        <Link href="/" className="hover:text-black transition-colors">Drops</Link>
-        <Link href="/" className="hover:text-black transition-colors">Archive</Link>
-        <Link href="/" className="hover:text-black transition-colors">Technical</Link>
-      </div>
-
-      {/* CART */}
-      <button className="flex items-center gap-2 group">
-        <span className="text-xs uppercase font-bold tracking-widest text-zinc-900">Cart</span>
-        <div className="relative">
-          <ShoppingBag className="w-5 h-5 text-zinc-900" />
-          <span className="absolute -top-1.5 -right-1.5 w-4 h-4 rounded-full bg-zinc-900 text-white text-[8px] flex items-center justify-center font-bold">
-            0
-          </span>
+        {/* Desktop Nav */}
+        <div className="hidden md:flex items-center gap-10">
+          {['Drops', 'Archive', 'Lookbook'].map((item) => (
+            <Link
+              key={item}
+              href="/"
+              className="relative text-[10px] uppercase tracking-[0.4em] font-medium text-zinc-500 hover:text-zinc-900 transition-colors py-1 group"
+            >
+              {item}
+              <span className="absolute bottom-0 left-0 w-0 h-px bg-zinc-900 group-hover:w-full transition-all duration-300" />
+            </Link>
+          ))}
         </div>
-      </button>
-    </nav>
+
+        <div className="flex items-center gap-4">
+          <button className="relative group">
+            <ShoppingBag className="w-5 h-5 text-zinc-700 group-hover:text-zinc-900 transition-colors" />
+            <span className="absolute -top-1 -right-1.5 w-3.5 h-3.5 rounded-full bg-zinc-900 text-white text-[7px] flex items-center justify-center font-bold">
+              0
+            </span>
+          </button>
+
+          {/* Mobile menu toggle */}
+          <button
+            className="md:hidden"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <X className="w-5 h-5 text-zinc-900" /> : <Menu className="w-5 h-5 text-zinc-900" />}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="fixed inset-x-0 top-[57px] z-40 bg-[#EAEAE5]/95 backdrop-blur-md border-b border-zinc-300/50 px-6 py-8 flex flex-col gap-6 md:hidden"
+        >
+          {['Drops', 'Archive', 'Lookbook'].map((item) => (
+            <Link
+              key={item}
+              href="/"
+              onClick={() => setMenuOpen(false)}
+              className="text-sm uppercase tracking-[0.3em] font-medium text-zinc-700 hover:text-zinc-900 transition-colors"
+            >
+              {item}
+            </Link>
+          ))}
+        </motion.div>
+      )}
+    </>
   )
 }
