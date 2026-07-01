@@ -1,4 +1,4 @@
-import { shopifyClient } from './client';
+import { getShopifyClient } from './client';
 import type { ShopifyCart, ShopifyLineItem } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,13 +30,13 @@ function mapCart(checkout: any): ShopifyCart {
 }
 
 export async function createCart(): Promise<ShopifyCart> {
-  const checkout = await shopifyClient.checkout.create();
+  const checkout = await getShopifyClient().checkout.create();
   return mapCart(checkout);
 }
 
 export async function getCart(cartId: string): Promise<ShopifyCart | null> {
   try {
-    const checkout = await shopifyClient.checkout.fetch(cartId);
+    const checkout = await getShopifyClient().checkout.fetch(cartId);
     if (!checkout) return null;
     return mapCart(checkout);
   } catch {
@@ -49,7 +49,7 @@ export async function addToCart(
   variantId: string,
   quantity: number = 1
 ): Promise<ShopifyCart> {
-  const checkout = await shopifyClient.checkout.addLineItems(cartId, [
+  const checkout = await getShopifyClient().checkout.addLineItems(cartId, [
     { variantId, quantity },
   ]);
   return mapCart(checkout);
@@ -60,7 +60,7 @@ export async function updateCartItem(
   lineItemId: string,
   quantity: number
 ): Promise<ShopifyCart> {
-  const checkout = await shopifyClient.checkout.updateLineItems(cartId, [
+  const checkout = await getShopifyClient().checkout.updateLineItems(cartId, [
     { id: lineItemId, quantity },
   ]);
   return mapCart(checkout);
@@ -70,7 +70,7 @@ export async function removeFromCart(
   cartId: string,
   lineItemId: string
 ): Promise<ShopifyCart> {
-  const checkout = await shopifyClient.checkout.removeLineItems(cartId, [
+  const checkout = await getShopifyClient().checkout.removeLineItems(cartId, [
     lineItemId,
   ]);
   return mapCart(checkout);

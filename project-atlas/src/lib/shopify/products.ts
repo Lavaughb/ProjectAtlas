@@ -1,4 +1,4 @@
-import { shopifyClient } from './client';
+import { getShopifyClient } from './client';
 import type { ShopifyProduct, ShopifyImage, ShopifyVariant } from './types';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -22,14 +22,14 @@ function mapProduct(product: any): ShopifyProduct {
 }
 
 export async function getAllProducts(): Promise<ShopifyProduct[]> {
-  const products = await shopifyClient.product.fetchAll();
+  const products = await getShopifyClient().product.fetchAll();
   return products.map(mapProduct);
 }
 
 export async function getProductByHandle(
   handle: string
 ): Promise<ShopifyProduct | null> {
-  const product = await shopifyClient.product.fetchByHandle(handle);
+  const product = await getShopifyClient().product.fetchByHandle(handle);
   if (!product) return null;
   return mapProduct(product);
 }
@@ -38,11 +38,11 @@ export async function getProductsByCollection(
   collectionHandle: string
 ): Promise<ShopifyProduct[]> {
   const collection =
-    await shopifyClient.collection.fetchByHandle(collectionHandle);
+    await getShopifyClient().collection.fetchByHandle(collectionHandle);
   if (!collection) return [];
 
   // fetchByHandle doesn't include products, so fetch with products
-  const collectionWithProducts = await shopifyClient.collection.fetchWithProducts(
+  const collectionWithProducts = await getShopifyClient().collection.fetchWithProducts(
     collection.id
   );
   if (!collectionWithProducts?.products) return [];
