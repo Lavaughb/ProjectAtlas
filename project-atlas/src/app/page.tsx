@@ -3,10 +3,8 @@
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shirt, CloudSun, Watch } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '@/components/navbar';
-
-const basePath = process.env.GITHUB_PAGES === 'true' ? '/ProjectAtlas' : '';
 
 // Replace with your Formspree form ID from https://formspree.io
 const FORMSPREE_ID = 'xojppkzz';
@@ -107,13 +105,20 @@ function WaitlistSection() {
 }
 
 export default function Home() {
+  useEffect(() => {
+    fetch('/api/shopify/products')
+      .then(res => res.json())
+      .then(data => console.log('🛍️ Shopify Products:', data))
+      .catch(err => console.error('Shopify fetch error:', err));
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#EAEAE5]">
       <Navbar />
 
       <section className="relative w-full h-[60vh] md:h-[90vh] overflow-hidden">
         <Image
-          src={`${basePath}/IMG_2135.jpeg`}
+          src={`/IMG_2135.jpeg`}
           alt="Project Atlas Group"
           fill
           priority
@@ -139,7 +144,7 @@ export default function Home() {
       <section className="flex flex-col md:flex-row min-h-[80vh] md:h-screen border-y border-zinc-200">
         <div className="flex-1 relative h-[50vh] md:h-full group overflow-hidden">
           <Image
-            src={`${basePath}/DY0A3524.jpeg`}
+            src={`/DY0A3524.jpeg`}
             alt="Always Prevail Street"
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
@@ -190,7 +195,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="col-span-2 row-span-2 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/9-SOY00376edited.jpeg`} alt="Collection piece" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/9-SOY00376edited.jpeg`} alt="Collection piece" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
           <motion.div
@@ -200,7 +205,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="col-span-1 row-span-1 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/IMG_4581.jpeg`} alt="Detail shot" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/IMG_4581.jpeg`} alt="Detail shot" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
           <motion.div
@@ -210,7 +215,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="col-span-1 row-span-1 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/IMG_3535.jpeg`} alt="Lookbook" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/IMG_3535.jpeg`} alt="Lookbook" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
           <motion.div
@@ -220,7 +225,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="col-span-2 row-span-1 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/DY0A3573.jpeg`} alt="Shadow" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/DY0A3573.jpeg`} alt="Shadow" fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
           <motion.div
@@ -230,7 +235,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="col-span-1 row-span-1 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/IMG_3554.jpeg`} alt="Model" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/IMG_3554.jpeg`} alt="Model" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
           <motion.div
@@ -240,7 +245,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="col-span-1 row-span-1 relative group overflow-hidden rounded-lg"
           >
-            <Image src={`${basePath}/IMG_4574.jpeg`} alt="Lifestyle" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
+            <Image src={`/IMG_4574.jpeg`} alt="Lifestyle" fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-105"/>
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
           </motion.div>
         </div>

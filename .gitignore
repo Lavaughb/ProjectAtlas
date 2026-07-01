@@ -1,0 +1,11 @@
+# Vercel
+.vercel
+
+# Environment variables
+.env*
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
