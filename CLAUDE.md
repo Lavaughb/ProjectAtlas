@@ -43,8 +43,15 @@ The browser never talks to Shopify directly. All requests proxy through server-s
 - `src/lib/shopify/cart.ts` — createCart, getCart, addToCart, updateCartItem, removeFromCart
 - `src/app/api/shopify/products/route.ts` — GET products (supports ?collection= and ?handle= params)
 - `src/app/api/shopify/cart/route.ts` — POST cart operations (action: create/add/update/remove), GET with ?cartId=
+- `src/context/CartContext.tsx` — Cart state via React Context; persists cartId in localStorage; lazy cart creation on first add; add/update/remove/checkout + drawer open state (`useCart` hook)
+- `src/components/providers.tsx` — Client wrapper mounting CartProvider + CartDrawer; mounted in layout.tsx
+- `src/components/cart/CartDrawer.tsx` — Slide-in cart panel (Framer Motion), subtotal, empty state, Checkout button → `cart.webUrl`
+- `src/components/cart/CartLineItem.tsx` — Cart row with quantity stepper (decrement to 0 removes) + remove
+- `src/components/products/ProductCard.tsx` — Product card: image, price, variant `<select>`, add-to-bag with "Added" confirmation + sold-out handling
+- `src/app/inventory/page.tsx` — Inventory page (server component, `force-dynamic`); fetches all products directly and renders a ProductCard grid
 - `src/app/globals.css` — Tailwind v4 imports + CSS custom properties
 - `tailwind.config.ts` — Brand colors: `atlas-black` (#050505), `atlas-cream` (#F5F5F0)
+- `next.config.ts` — allows `cdn.shopify.com` images for next/image
 
 ## Implementation Progress
 
@@ -61,18 +68,23 @@ The browser never talks to Shopify directly. All requests proxy through server-s
 - API route handlers proxying all Shopify calls
 - Verified: products return from store, cart creation works
 
-### Phase 3: Cart UI + State — NEXT
-Remaining work:
-- `src/context/CartContext.tsx` — Cart state via React Context + localStorage persistence
-- `src/components/providers.tsx` — Client wrapper, mount in layout.tsx
-- `src/components/cart/CartDrawer.tsx` — Slide-in cart panel (Framer Motion)
-- `src/components/cart/CartLineItem.tsx` — Cart row with quantity stepper
-- `src/components/products/ProductCard.tsx` — Product card with image, price, size selector, add to cart
-- Wire navbar cart badge + drawer toggle
-- Replace hardcoded Drop 001 section with Shopify product data
+### Phase 3: Cart UI + State — COMPLETE
+- CartContext with React Context + localStorage cartId persistence; lazy cart creation on first add (guarded against duplicate carts)
+- Providers wrapper mounts CartProvider + CartDrawer in layout.tsx
+- CartDrawer (Framer Motion slide-in) + CartLineItem with quantity stepper / remove
+- ProductCard with image, price, variant selector, add-to-bag (+ "Added" state, sold-out handling)
+- Navbar cart badge shows live item count and opens the drawer; added "Shop" nav link → /inventory
+- Added dedicated `/inventory` page (server component) listing all Shopify products
+- Removed the console.log product test from page.tsx
+- Allowed cdn.shopify.com in next.config.ts for next/image
 
-### Phase 4: Checkout — TODO
-- Checkout redirect to Shopify hosted URL (`cart.webUrl`)
-- Post-checkout cart cleanup (clear localStorage)
-- Optional branded order confirmation page
-- Remove console.log test from page.tsx
+### Phase 4: Checkout — MOSTLY COMPLETE (live in production)
+- DONE: Checkout redirects to Shopify hosted URL (`cart.webUrl`)
+- DONE: Removed console.log test from page.tsx
+- **VERIFIED: two successful end-to-end test orders placed via Shopify Payments test mode (card 4242 4242 4242 4242); orders received in Shopify Admin → Orders. Test mode has since been turned OFF — store now accepts real payments.**
+- Deployed to production (Vercel, main branch). Users can browse `/inventory` and purchase.
+- STILL TODO (UX polish, non-blocking): clear stale cartId from localStorage after a completed checkout; optional branded order-confirmation / `?checkout=success` return page.
+
+### Notes / gotchas
+- Storefront API exposes only availability (in-stock / sold-out), not exact inventory counts. When a shopper adds more than is in stock, Shopify caps the quantity and returns a `warnings` entry (`MERCHANDISE_NOT_ENOUGH_STOCK`) that `mapCart` currently drops — surfacing it as a toast is a possible enhancement.
+- shopify-buy 3.0.7's `checkout.*` methods proxy to the newer Storefront **Cart API** (ids come back as `gid://shopify/Cart/…` and `gid://shopify/CartLine/…`).

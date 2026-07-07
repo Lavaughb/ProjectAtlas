@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Shirt, CloudSun, Watch } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/navbar';
 
 // Replace with your Formspree form ID from https://formspree.io
@@ -105,13 +105,6 @@ function WaitlistSection() {
 }
 
 export default function Home() {
-  useEffect(() => {
-    fetch('/api/shopify/products')
-      .then(res => res.json())
-      .then(data => console.log('🛍️ Shopify Products:', data))
-      .catch(err => console.error('Shopify fetch error:', err));
-  }, []);
-
   return (
     <main className="min-h-screen bg-[#EAEAE5]">
       <Navbar />
