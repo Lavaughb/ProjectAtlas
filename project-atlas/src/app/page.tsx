@@ -244,6 +244,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* New In — Latest Pictures */}
+      <section className="px-3 md:px-8 py-12 md:py-20">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="text-[10px] md:text-xs uppercase tracking-[0.5em] text-zinc-400 mb-8 md:mb-12 text-center"
+        >
+          New In
+        </motion.p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
+          {[
+            { src: '/NewPictures1.jpeg', alt: 'New Picture 1' },
+            { src: '/NewPictures2.jpeg', alt: 'New Picture 2' },
+            { src: '/NewPictures3.jpeg', alt: 'New Picture 3' },
+          ].map((pic, i) => (
+            <motion.div
+              key={pic.src}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              className="relative aspect-[3/4] group overflow-hidden rounded-lg"
+            >
+              <Image
+                src={pic.src}
+                alt={pic.alt}
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-500" />
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* Statement Section */}
       <section className="py-24 md:py-40 px-6 md:px-20 bg-zinc-900 text-white">
         <div className="max-w-5xl mx-auto">
